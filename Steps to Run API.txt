@@ -1,0 +1,37 @@
+Steps to Run API Automation in Katalon Studio
+
+1. Open Katalon Studio and Load Your Project
+- Launch Katalon Studio and open your project.
+
+2. Set API Key & Base URL
+- Go to Profiles → Default and add the following Global Variables:
+  - GlobalVariable.api_KEY → Your OpenWeather API key (generated from OpenWeather API).
+  - GlobalVariable.baseURL → http://api.openweathermap.org/data/2.5
+- Example full request URL:
+  ${GlobalVariable.baseURL}/forecast?q=Jakarta,ID&appid=${GlobalVariable.api_KEY}
+
+3. Run a Single Test Case
+- Navigate to the Test Cases folder.
+- Open the test case file (e.g., TC_01_5Day_WeatherForecast).
+- Click the Run button to execute the test case.
+- Repeat the same steps for TC_02_Air_Pollution.
+
+4. Run All Tests in a Test Suite
+- Navigate to the Test Suite folder.
+- Open the test suite file (e.g., TS_WeatherApi).
+- Click the Run button to execute all test cases in the suite.
+
+Important Note:
+If you are running the tests using a Test Suite, make sure to update the test object URL for GET_Air_Pollution:
+- Before running in Test Suite:
+  ${GlobalVariable.baseURL}/air_pollution?lat=-6.2146&lon=106.8451&appid=${GlobalVariable.api_KEY}
+- Update to this format:
+  ${GlobalVariable.baseURL}/air_pollution?lat=${GlobalVariable.latitude}&lon=${GlobalVariable.longitude}&appid=${GlobalVariable.api_KEY}
+This ensures that latitude and longitude values are dynamically extracted from the previous API response.
+
+5. Global Variable Descriptions
+- GlobalVariable.api_KEY → API Key from OpenWeather API
+- GlobalVariable.baseURL → Base URL of OpenWeather API (http://api.openweathermap.org/data/2.5)
+- GlobalVariable.latitude → Extracted from JSON response (city coordinate latitude)
+- GlobalVariable.longitude → Extracted from JSON response (city coordinate longitude)
+
